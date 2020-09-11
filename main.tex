@@ -1,7 +1,10 @@
 \documentclass[10pt,landscape]{article}
-\usepackage{amssymb,amsmath,amsthm,amsfonts,commath}
+\usepackage{amssymb,amsmath,amsthm,amsfonts,commath,bm}
 \usepackage{multicol,multirow}
 \usepackage[landscape,margin=0.5in]{geometry}
+
+\title{A Differential Geometry Basics Cheat Sheet}
+\author{Nick Konz}
 
 \setlength{\columnseprule}{0.4pt}
 
@@ -10,10 +13,14 @@
 \theoremstyle{definition}
 \newtheorem{definition}{Definition}[section]
 
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+
 
 % commands
 \newcommand{\R}{\mathbb{R}}
 \newcommand{\Rn}{\mathbb{R}^n}
+\newcommand{\Ci}{C^\infty}
 
 \begin{document}
 
@@ -26,7 +33,7 @@
 \begin{multicols*}{3}
 
 \section{Prerequisite Knowledge}
-\textit{We only assume basic knowledge of continuity and differentiability in the context of functions.}
+\textit{We only assume basic knowledge of continuity and differentiability in the context of functions and topology. Here, $\forall$ means ``for all'' or ``for each'', and $\exists$ means ``there exists''.}
 \subsection{Some Basic Topology}
 
 \theoremstyle{definition}
@@ -61,14 +68,56 @@ We label $X$ as the \textbf{underlying set}, $\mathcal{J}$ as the \textbf{topolo
 
 \end{definition}
 
+\begin{remark}
+Topological and metric spaces $(X,\mathcal{J})$ and $(X, d)$, respectively, are sometimes notated simply as $X$.
+\end{remark}
+
 \theoremstyle{definition}
 \begin{definition}{\textit{Homeomorphism.}}
 Let $(X,\mathcal{J})$ and $(Y, \mathcal{K})$ be topological spaces. $(X,\mathcal{J})$ and $(Y, \mathcal{K})$ are \textbf{homeomorphic} if $\exists$ inverse functions, or \textbf{homeomorphisms}, $f:X\rightarrow Y$ and $g:Y\rightarrow X$ such that $f, g$ are continuous.
 \end{definition}
 
+\section{Manifolds}
+
 \theoremstyle{definition}
 \begin{definition}{\textit{Manifold.}}
+A \textbf{manifold} is a metric space $M$ such that if $x\in M$, $\exists$ some neighborhood $U$ of $x$ and some $n\in\left\{0,1,2\ldots\right\}$ such that $U$ is homeomorphic to $\Rn$. If $\exists$ such an $n$ that is the same $\forall x\in M$, we say that $M$ is \textbf{$\bm{n}$-dimensional}, which can be notated as $M^n$.
 \end{definition}
+
+\begin{remark}
+Think of a manifold as being a surface that is locally Euclidean.
+\end{remark}
+
+\theoremstyle{definition}
+\begin{definition}{\textit{$C^\infty$-related Homeomorphisms.}}
+Let $M$ be some manifold, and let $U$, $V$ be open subsets of $M$. Two homeomorphisms $x:U\rightarrow x(U)\subset\Rn$ and $y:V\rightarrow y(V) \subset \Rn$ (for some $n$) are $\bm{\Ci}$\textbf{-related} if the maps
+\begin{align}
+    y \circ x^{-1} &: x(U\cap V) \rightarrow y(U\cap V)\\
+    x \circ y^{-1} &: y(U\cap V) \rightarrow x(U\cap V)
+\end{align}
+are infinitely differentiable, or $\bm{\Ci}$.
+\end{definition}
+
+\theoremstyle{definition}
+\begin{definition}{\textit{Atlas.}}
+A family of \textit{mutually} $\Ci$-related homeomorphisms whose domains cover $M$ (i.e. their union equals $M$) is an \textbf{atlas} of $M$.
+\end{definition}
+
+\theoremstyle{definition}
+\begin{definition}{\textit{Chart/Coordinate System.}}
+A \textbf{chart} or \textbf{coordinate system} for some manifold $M$ is a homeomorphism $x$ from some open $U\in M$ to an open subset of $\Rn$, denoted $(x, U)$. A chart of $M$ is a member of some atlas of $M$.
+\end{definition}
+
+\begin{remark}
+Charts/coordinate systems $(x, U)$ create a way of assigning coordinates to points on $U$, and are sometimes notated simply with $x$.
+\end{remark}
+
+\theoremstyle{definition}
+\begin{definition}{\textit{Differentiable Manifold.}}
+A \textbf{differentiable}, \textbf{smooth} or $\bm{C^\infty}$ manifold is a pair $(M, \mathcal{A})$, where $M$ is some manifold, and $\mathcal{A}$ is some \textit{maximal atlas} for $M$, i.e. the union of all possible atlases of $M$. 
+\end{definition}
+
+% add diffeomorphisms? only if needed later; this should be simple
 
 \end{multicols*}
 \end{document}
