@@ -143,12 +143,70 @@ To summarize, a manifold is essentially a space that can be covered with coordin
 Consider some point $v\in\Rn$, drawn as an arrow with a ``reference point'' of some $p\in\Rn$; this arrow from $p$ to $p+v$ is denoted $(p,v)$. The set of all such $(p,v)$ is the \textbf{tangent space} $T\Rn = \Rn\times\Rn$ of $\Rn$. Elements of $T\Rn$ are \textbf{tangent vectors} of $\Rn$.
 \end{definition}
 
-\begin{definition}{\textit{Projection Map.}}
+\begin{definition}{\textit{Projection Map on $\Rn$.}}
+The \textbf{projection map} $\pi:\Rn\times\Rn\rightarrow\Rn$ recovers the first member of any pair $(p, v)\in T\Rn$, and is defined as
+\begin{equation}
+    \pi(p, v) = p.
+\end{equation}
+\end{definition}
+
+\begin{remark}
+The projection map can be thought of as mapping any tangent vector to ``where it's at''/``where it comes from''.
+\end{remark}
+
+\begin{definition}{\textit{Fiber of $\Rn$.}}
+For some $p\in\Rn$, the set $\left\{(p,v) : v\in\Rn\right\}$ formed by $\pi^{-1}(p)$ is defined as the \textbf{fiber} over $p$.
+\end{definition}
+
+\begin{remark}
+The fiber $\pi^{-1}(p)$ can be pictured as all arrows that start at $p$. The name ``fiber'' is also intuitive: imagine a cylindrical hairbrush; $\pi (p,v)$ takes any point $v$ on some bristle on the brush and maps it to the root $p$ of that bristle. Such a fiber also forms a vector space, which will come up later.
+\end{remark}
+
+\begin{definition}{\textit{Directional Derivative}}
+Let $f:\Rn\rightarrow\R^m$ be a differentiable map (for some $n, m$). The \textbf{directional derivative} $Df(p)(v)$ (the derivative of $f$ along $v\in\Rn$, at $p\in\Rn$) is defined by
+\begin{equation}
+    Df(p)(v)= \lim_{h\rightarrow 0} \frac{f(p+hv) - f(p)}{h}.
+\end{equation}
+
 
 \end{definition}
 
-\begin{definition}{\textit{Fiber5.}}
+\begin{definition}{\textit{Pushforward Operator for $\Rn$.}}
+Let $f:\Rn\rightarrow\R^m$ be a differentiable map.. The \textbf{pushforward operator} $f_*:T\Rn\rightarrow T\mathbb{R}^m$ is defined by
+\begin{equation}
+    f_*=\bigcup_{p\in\Rn}f_{*p},
+\end{equation}
+where $f_{*p}$ is the mapping that takes some $(p, v)\in T\Rn$ to $\left.Df(p)(v)\right|_{f(p)}\in T\R^m$.
+\end{definition}
 
+\begin{remark}
+In other words, the pushforward operator $f_*$ takes a directional derivative operator (tangent vector) from within one tangent space $T\Rn$ to a directional derivative operator within another tangent space $T\R^m$, all dependent on the function $f:\Rn\rightarrow\R^m$. As such, $\pi\circ f_* = f \circ \pi$.
+\end{remark}
+
+\begin{definition}{\textit{Tangent Space on a Manifold.}}
+\end{definition}
+
+
+\begin{definition}{\textit{Vector Bundle.}}
+An $n$-dimensional \textbf{vector bundle} is a five-tuple $\xi=(E,\pi,B,\oplus, \odot)$, where
+\begin{enumerate}
+    \item $E$ is the \textbf{total space}
+    \item $B$ is the \textbf{base space}
+    \item $\pi:E\rightarrow B$ is a continuous map onto $B$
+    \item $\oplus$ and $\odot$ are operators defined to be analogous to addition and scalar multiplication, such that each \textit{fiber} $\pi^{-1}(p)$ ($p\in E$) is an $n$-dimensional vector space over $\R$.
+\end{enumerate}
+\end{definition}
+
+\begin{remark}
+Vector bundles, or bundles for short, are usually just notated $\pi: E\rightarrow B$, as the inclusion of $\oplus$ and $\odot$ to form the fiber vector spaces is treated as implicit.
+\end{remark}
+
+\begin{definition}{\textit{Tangent Bundle.}}
+The \textbf{tangent bundle} $TM$ of a manifold $M$ is the (disjoint) union of all tangent spaces on $M$, i.e.
+\begin{equation}
+    TM = \bigcup_{p\in M}T_pM,
+\end{equation}
+and is a type of vector bundle, defined with $\pi: TM \rightarrow M$
 \end{definition}
  
 \end{multicols*}
