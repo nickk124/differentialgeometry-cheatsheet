@@ -77,6 +77,19 @@ Topological and metric spaces $(X,\mathcal{J})$ and $(X, d)$, respectively, are 
 Let $(X,\mathcal{J})$ and $(Y, \mathcal{K})$ be topological spaces. $(X,\mathcal{J})$ and $(Y, \mathcal{K})$ are \textbf{homeomorphic} if $\exists$ inverse functions, or \textbf{homeomorphisms}, $f:X\rightarrow Y$ and $g:Y\rightarrow X$ such that $f, g$ are continuous.
 \end{definition}
 
+\subsection{Some Linear Algebra}
+\begin{definition}{\textit{Vector Space.}}
+A \textbf{vector space} $V$ is a set, or space, that is closed under addition and scalar multiplication, i.e. the result of performing these operations on some element(s) of $V$ is itself an element of $V$. We define elements of a vector space as \textbf{vectors}.
+\end{definition}
+
+\begin{definition}{\textit{Basis.}}
+A \textbf{basis} for a vector space $V$ is a set of linearly independent vectors (i.e. none of the basis vectors can be written as linear combinations of the others) that span $V$ (i.e. any element of $V$ can be written as a linear combination of the basis vectors). In other words, the basis vectors define a ``coordinate system'' for $V$.
+\end{definition}
+
+\begin{remark}
+You can convert vectors written in one basis to another via \textit{change-of-basis} matrices (or functions in the case of infinite-dimensional vectors).
+\end{remark}
+
 \section{Manifolds}
 
 \theoremstyle{definition}
@@ -119,5 +132,24 @@ A \textbf{differentiable}, \textbf{smooth} or $\bm{C^\infty}$ manifold is a pair
 
 % add diffeomorphisms? only if needed later; this should be simple
 
+\begin{remark}
+To summarize, a manifold is essentially a space that can be covered with coordinate charts, which are invertible, continuous mappings to some subset of $\Rn$. If the mapping between any pair of overlapping charts is differentiable, then the manifold itself is differentiable.
+\end{remark}
+
+\section{The Tangent Bundle}
+
+\theoremstyle{definition}
+\begin{definition}{\textit{Tangent Space of $\Rn$.}}
+Consider some point $v\in\Rn$, drawn as an arrow with a ``reference point'' of some $p\in\Rn$; this arrow from $p$ to $p+v$ is denoted $(p,v)$. The set of all such $(p,v)$ is the \textbf{tangent space} $T\Rn = \Rn\times\Rn$ of $\Rn$. Elements of $T\Rn$ are \textbf{tangent vectors} of $\Rn$.
+\end{definition}
+
+\begin{definition}{\textit{Projection Map.}}
+
+\end{definition}
+
+\begin{definition}{\textit{Fiber5.}}
+
+\end{definition}
+ 
 \end{multicols*}
 \end{document}
