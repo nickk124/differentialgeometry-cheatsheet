@@ -1,0 +1,74 @@
+\documentclass[10pt,landscape]{article}
+\usepackage{amssymb,amsmath,amsthm,amsfonts,commath}
+\usepackage{multicol,multirow}
+\usepackage[landscape,margin=0.5in]{geometry}
+
+\setlength{\columnseprule}{0.4pt}
+
+
+% styles
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+
+
+% commands
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Rn}{\mathbb{R}^n}
+
+\begin{document}
+
+\begin{center}
+     \Large{\textbf{A Differential Geometry Basics Cheat Sheet}} \\
+     \small{By Nick Konz}\\
+     \textit{This is designed to be a quick, yet rigorous introduction/reference to the basic principles found within differential geometry, covering only the bare minimum of topics needed.}
+     \small{\textit{Largely adapted from Spivak's} {A Comprehensive Introduction to Differential Geometry, 3rd Edition} and \textit{Mendelson's} Introduction to Topology, 3rd Edition}
+\end{center}
+\begin{multicols*}{3}
+
+\section{Prerequisite Knowledge}
+\textit{We only assume basic knowledge of continuity and differentiability in the context of functions.}
+\subsection{Some Basic Topology}
+
+\theoremstyle{definition}
+\begin{definition}{\textit{Neighborhood.}}
+Let $a\in\Rn, \delta > 0$. The $\delta-$\textbf{neighborhood} of $a$ is the set
+\begin{equation}
+    U(a,\delta)=\left\{x\in\Rn:\norm{x-a}<\delta\right\}.
+\end{equation}
+\end{definition}
+
+\theoremstyle{definition}
+\begin{definition}{\textit{Metric Space.}}
+Let $X$ be some non-empty set and $d$ be the mapping/function $d:X\times X\rightarrow \R$. The pair $(X,d)$ is a \textbf{metric space} if, $\forall x,y,z\in X$,
+\begin{enumerate}
+    \item $d(x,y) \geq 0$
+    \item $d(x,y) = 0$ if and only if (iff) $x = y$
+    \item $d(x,y)=d(y,x)$
+    \item $d(x,z)\leq d(x,y) + d(y,z)$ \textit{(triangle inequality)}.
+\end{enumerate}
+\end{definition}
+
+\theoremstyle{definition}
+\begin{definition}{\textit{Topological Space.}}
+Let $X$ be a non-empty set and $\mathcal{J}$ be a collection of subsets of $X$. $(X, \mathcal{J})$ is a \textbf{topological space} if
+\begin{enumerate}
+    \item $X \in \mathcal{J}$
+    \item $\varnothing \in \mathcal{J}$, where $\varnothing$ is the empty set
+    \item If $O_1, O_2, \ldots , O_n \in \mathcal{J}$, then $\bigcap_{i=1}^nO_i\in\mathcal{J}$
+    \item If $\forall \alpha \in I$, $O_\alpha\in\mathcal{J}$, then $\bigcup_{\alpha\in I}O_\alpha\in\mathcal{J}$ \\($I$ is some \textit{indexing set}).
+\end{enumerate}
+We label $X$ as the \textbf{underlying set}, $\mathcal{J}$ as the \textbf{topology} on $X$, and members of $\mathcal{J}$ as \textbf{open sets}.
+
+\end{definition}
+
+\theoremstyle{definition}
+\begin{definition}{\textit{Homeomorphism.}}
+Let $(X,\mathcal{J})$ and $(Y, \mathcal{K})$ be topological spaces. $(X,\mathcal{J})$ and $(Y, \mathcal{K})$ are \textbf{homeomorphic} if $\exists$ inverse functions, or \textbf{homeomorphisms}, $f:X\rightarrow Y$ and $g:Y\rightarrow X$ such that $f, g$ are continuous.
+\end{definition}
+
+\theoremstyle{definition}
+\begin{definition}{\textit{Manifold.}}
+\end{definition}
+
+\end{multicols*}
+\end{document}
