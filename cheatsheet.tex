@@ -28,7 +28,7 @@
      \Large{\textbf{A Differential Geometry Basics Cheat Sheet}} \\
      \small{By Nick Konz}\\
      \textit{This is designed to be a quick, yet rigorous introduction/reference to the basic principles found within differential geometry, covering only the bare minimum of topics needed.}
-     \small{\textit{Largely adapted from Spivak's} {A Comprehensive Introduction to Differential Geometry, 3rd Edition} and \textit{Mendelson's} Introduction to Topology, 3rd Edition}
+     \small{\textit{Largely adapted from Spivak's} {A Comprehensive Introduction to Differential Geometry, 3rd Edition}, \textit{Mendelson's} Introduction to Topology, 3rd Edition and \textit{Michor's} Topics in Differential Geometry.}
 \end{center}
 \begin{multicols*}{3}
 
@@ -89,6 +89,21 @@ A \textbf{basis} for a vector space $V$ is a set of linearly independent vectors
 \begin{remark}
 You can convert vectors written in one basis to another via \textit{change-of-basis} matrices (or functions in the case of infinite-dimensional vectors).
 \end{remark}
+
+\subsection{Some Discrete Math}
+\begin{definition}{\textit{Equivalence Relation.}}
+A \textbf{relation} on some set $X$ is a subset $R$ of $X\times X$. We write $x R y$ to mean $(x, y)\in R$, i.e. \textit{x is related to y}.
+The relation is an \textbf{equivalence relation} if it is
+\begin{enumerate}
+    \item \textbf{reflexive}: $aRa \quad \forall a\in X$
+    \item \textbf{symmetric}: $aRb \Rightarrow bRa \quad \forall a,b\in X$
+    \item \textbf{transitive}: $aRb,\, bRc \Rightarrow aRc \quad \forall a,b,c\in X$.
+\end{enumerate}
+\end{definition}
+
+\begin{definition}{\textit{Equivalence Class.}}
+Give an equivalence relation $R$ on some set $X$, the \textbf{equivalence class} of some $y\in X$ is the set $\left\{x\in X: xRy\right\}$.
+\end{definition}
 
 \section{Manifolds}
 
@@ -184,7 +199,18 @@ In other words, the pushforward operator $f_*$ takes a directional derivative op
 \end{remark}
 
 \begin{definition}{\textit{Tangent Space on a Manifold.}}
+    Let $M$ be some differentiable manifold with some chart $x:U\rightarrow\Rn$, and choose some $p\in M$. Suppose that we have two curves $c_1,c_2:(-\varepsilon,\varepsilon)\rightarrow M$ with $c_1(0)=c_2(0) = p$ for some $\varepsilon\in\R>0$, such that both $x\circ c_1, x\circ c_2:(-\varepsilon,\varepsilon)\rightarrow \Rn$ are differentiable.
+
+    We say that $c_1$ and $c_2$ are \textbf{equivalent} at $0$ iff. these two derivatives coincide at $0$, defining an equivalence relation on the set of all differentiable curves initialized at $p$. This forms an equivalence class of such curves, known as the \textbf{tangent vectors} of $M$ at $p$. The \textbf{tangent space} of $M$ at $p$, denoted $T_pM$, is the set of all tangent vectors at $p$
 \end{definition}
+
+\begin{remark}
+    Think of $T_p$ as the (vector) space of all possible directions through which $p$ can be passed through ``tangential'' to $M$. Note that $T_pM$ does \textit{not} depend on the choice of coordinate system $p$. 
+\end{remark}
+
+% \begin{remark}
+%     The definition for such tangent spaces found within Spivak is too long for this sheet; as such
+% \end{remark}
 
 
 \begin{definition}{\textit{Vector Bundle.}}
@@ -206,7 +232,7 @@ The \textbf{tangent bundle} $TM$ of a manifold $M$ is the (disjoint) union of al
 \begin{equation}
     TM = \bigcup_{p\in M}T_pM,
 \end{equation}
-and is a type of vector bundle, defined with $\pi: TM \rightarrow M$
+and is a type of vector bundle, defined with $\pi: TM \rightarrow M$.
 \end{definition}
  
 \end{multicols*}
