@@ -1,6 +1,7 @@
 \documentclass[10pt,landscape]{article}
 \usepackage{amssymb,amsmath,amsthm,amsfonts,commath,bm}
 \usepackage{multicol,multirow}
+\usepackage{physics}
 \usepackage[landscape,margin=0.5in]{geometry}
 
 \title{A Differential Geometry Basics Cheat Sheet}
@@ -12,6 +13,9 @@
 % styles
 \theoremstyle{definition}
 \newtheorem{definition}{Definition}[section]
+
+\theoremstyle{theorem}
+\newtheorem{theorem}{Theorem}[section]
 
 \theoremstyle{remark}
 \newtheorem*{remark}{Remark}
@@ -102,7 +106,7 @@ The relation is an \textbf{equivalence relation} if it is
 \end{definition}
 
 \begin{definition}{\textit{Equivalence Class.}}
-Give an equivalence relation $R$ on some set $X$, the \textbf{equivalence class} of some $y\in X$ is the set $\left\{x\in X: xRy\right\}$.
+Given an equivalence relation $R$ on some set $X$, the \textbf{equivalence class} of some $y\in X$ is the set $\left\{x\in X: xRy\right\}$.
 \end{definition}
 
 \section{Manifolds}
@@ -145,19 +149,30 @@ Charts/coordinate systems $(x, U)$ create a way of assigning coordinates to poin
 A \textbf{differentiable}, \textbf{smooth} or $\bm{C^\infty}$ manifold is a pair $(M, \mathcal{A})$, where $M$ is some manifold, and $\mathcal{A}$ is some \textit{maximal atlas} for $M$, i.e. the union of all possible atlases of $M$. 
 \end{definition}
 
+\theoremstyle{definition}
+\begin{definition}{\textit{Differentiable Map Between Manifolds.}}
+Let $(M, \mathcal{A})$ and $(N,\mathcal{B})$ be differentiable/smooth manifolds (paired explicitly here with their atlases). A function $f:M\rightarrow N$ is \textbf{differentiable}/\textbf{smooth} if for all coordinate systems $(x,U)$ for $M$ and $(y,V)$ for $N$, the map
+\begin{equation}
+    y\circ f\circ x^{-1} : \Rn \rightarrow \R^m,
+\end{equation}
+where $n$ and $m$ are the dimensionalities of Euclidean space that $U$ and $V$ are homeomorphic to, respectively. We use $'$ to notate differentiation, i.e. the derivative of some $f$ is $f'$.
 % add diffeomorphisms? only if needed later; this should be simple
+\end{definition}
 
 \begin{remark}
-To summarize, a manifold is essentially a space that can be covered with coordinate charts, which are invertible, continuous mappings to some subset of $\Rn$. If the mapping between any pair of overlapping charts is differentiable, then the manifold itself is differentiable.
+To summarize, a manifold is essentially a space that can be covered with coordinate charts, which are invertible, continuous mappings to some subset of $\Rn$. If the mapping between any pair of overlapping charts is differentiable, then the manifold itself is differentiable. 
+
+We usually don't explicitly notate the atlas of a (differentiable) manifold, i.e. $(M, \mathcal{A})$ vs. simply $M$.
 \end{remark}
 
 \section{The Tangent Bundle}
 
 \theoremstyle{definition}
-\begin{definition}{\textit{Tangent Space of $\Rn$.}}
+\begin{definition}{\textit{Tangent Space on $\Rn$.}}
 Consider some point $v\in\Rn$, drawn as an arrow with a ``reference point'' of some $p\in\Rn$; this arrow from $p$ to $p+v$ is denoted $(p,v)$. The set of all such $(p,v)$ is the \textbf{tangent space} $T\Rn = \Rn\times\Rn$ of $\Rn$. Elements of $T\Rn$ are \textbf{tangent vectors} of $\Rn$.
 \end{definition}
 
+\theoremstyle{definition}
 \begin{definition}{\textit{Projection Map on $\Rn$.}}
 The \textbf{projection map} $\pi:\Rn\times\Rn\rightarrow\Rn$ recovers the first member of any pair $(p, v)\in T\Rn$, and is defined as
 \begin{equation}
@@ -169,6 +184,7 @@ The \textbf{projection map} $\pi:\Rn\times\Rn\rightarrow\Rn$ recovers the first 
 The projection map can be thought of as mapping any tangent vector to ``where it's at''/``where it comes from''.
 \end{remark}
 
+\theoremstyle{definition}
 \begin{definition}{\textit{Fiber of $\Rn$.}}
 For some $p\in\Rn$, the set $\left\{(p,v) : v\in\Rn\right\}$ formed by $\pi^{-1}(p)$ is defined as the \textbf{fiber} over $p$.
 \end{definition}
@@ -177,17 +193,20 @@ For some $p\in\Rn$, the set $\left\{(p,v) : v\in\Rn\right\}$ formed by $\pi^{-1}
 The fiber $\pi^{-1}(p)$ can be pictured as all arrows that start at $p$. The name ``fiber'' is also intuitive: imagine a cylindrical hairbrush; $\pi (p,v)$ takes any point $v$ on some bristle on the brush and maps it to the root $p$ of that bristle. Such a fiber also forms a vector space, which will come up later.
 \end{remark}
 
-\begin{definition}{\textit{Directional Derivative}}
+\theoremstyle{definition}
+\begin{definition}{\textit{Directional Derivative.}}
 Let $f:\Rn\rightarrow\R^m$ be a differentiable map (for some $n, m$). The \textbf{directional derivative} $Df(p)(v)$ (the derivative of $f$ along $v\in\Rn$, at $p\in\Rn$) is defined by
-\begin{equation}
-    Df(p)(v)= \lim_{h\rightarrow 0} \frac{f(p+hv) - f(p)}{h}.
-\end{equation}
+\begin{align}
+    &Df(p)(v) = \lim_{h\rightarrow 0} \frac{f(p+hv) - f(p)}{h}. \\
+    &= \left(D_1f(p)(v), \ldots, D_if(p)(v), \ldots ,D_nf(p)(v)\right)
+\end{align}
 
 
 \end{definition}
 
-\begin{definition}{\textit{Pushforward Operator for $\Rn$.}}
-Let $f:\Rn\rightarrow\R^m$ be a differentiable map.. The \textbf{pushforward operator} $f_*:T\Rn\rightarrow T\mathbb{R}^m$ is defined by
+\theoremstyle{definition}
+\begin{definition}{\textit{Pushforward Operator on $\Rn$.}}
+Let $f:\Rn\rightarrow\R^m$ be a differentiable map. The \textbf{pushforward operator} $f_*:T\Rn\rightarrow T\mathbb{R}^m$ is defined by
 \begin{equation}
     f_*=\bigcup_{p\in\Rn}f_{*p},
 \end{equation}
@@ -198,42 +217,100 @@ where $f_{*p}$ is the mapping that takes some $(p, v)\in T\Rn$ to $\left.Df(p)(v
 In other words, the pushforward operator $f_*$ takes a directional derivative operator (tangent vector) from within one tangent space $T\Rn$ to a directional derivative operator within another tangent space $T\R^m$, all dependent on the function $f:\Rn\rightarrow\R^m$. As such, $\pi\circ f_* = f \circ \pi$.
 \end{remark}
 
+\theoremstyle{definition}
 \begin{definition}{\textit{Tangent Space on a Manifold.}}
     Let $M$ be some differentiable manifold with some chart $x:U\rightarrow\Rn$, and choose some $p\in M$. Suppose that we have two curves $c_1,c_2:(-\varepsilon,\varepsilon)\rightarrow M$ with $c_1(0)=c_2(0) = p$ for some $\varepsilon\in\R>0$, such that both $x\circ c_1, x\circ c_2:(-\varepsilon,\varepsilon)\rightarrow \Rn$ are differentiable.
 
-    We say that $c_1$ and $c_2$ are \textbf{equivalent} at $0$ iff. these two derivatives coincide at $0$, defining an equivalence relation on the set of all differentiable curves initialized at $p$. This forms an equivalence class of such curves, known as the \textbf{tangent vectors} of $M$ at $p$. The \textbf{tangent space} of $M$ at $p$, denoted $T_pM$, is the set of all tangent vectors at $p$
+    We say that $c_1$ and $c_2$ are \textbf{equivalent} at $0$ iff. these two derivatives coincide at $0$, defining an equivalence relation on the set of all differentiable curves initialized at $p$. This forms an equivalence class of such curves, known as the \textbf{tangent vectors} of $M$ at $p$. The class of any such curve $c$ is written $c'(0)$. The \textbf{tangent space} of $M$ at $p$, denoted $T_pM$, is the set of all tangent vectors at $p$.
 \end{definition}
 
 \begin{remark}
-    Think of $T_p$ as the (vector) space of all possible directions through which $p$ can be passed through ``tangential'' to $M$. Note that $T_pM$ does \textit{not} depend on the choice of coordinate system $p$. 
+    Think of $T_p$ as the (vector) space of all possible directions through which $p$ can be passed through ``tangential'' to $M$. Note that $T_pM$ does \textit{not} depend on the choice of coordinate system $x$. 
 \end{remark}
 
 % \begin{remark}
 %     The definition for such tangent spaces found within Spivak is too long for this sheet; as such
 % \end{remark}
 
-
-\begin{definition}{\textit{Vector Bundle.}}
-An $n$-dimensional \textbf{vector bundle} is a five-tuple $\xi=(E,\pi,B,\oplus, \odot)$, where
-\begin{enumerate}
-    \item $E$ is the \textbf{total space}
-    \item $B$ is the \textbf{base space}
-    \item $\pi:E\rightarrow B$ is a continuous map onto $B$
-    \item $\oplus$ and $\odot$ are operators defined to be analogous to addition and scalar multiplication, such that each \textit{fiber} $\pi^{-1}(p)$ ($p\in E$) is an $n$-dimensional vector space over $\R$.
-\end{enumerate}
-\end{definition}
-
 \begin{remark}
 Vector bundles, or bundles for short, are usually just notated $\pi: E\rightarrow B$, as the inclusion of $\oplus$ and $\odot$ to form the fiber vector spaces is treated as implicit.
 \end{remark}
 
-\begin{definition}{\textit{Tangent Bundle.}}
-The \textbf{tangent bundle} $TM$ of a manifold $M$ is the (disjoint) union of all tangent spaces on $M$, i.e.
-\begin{equation}
-    TM = \bigcup_{p\in M}T_pM,
-\end{equation}
-and is a type of vector bundle, defined with $\pi: TM \rightarrow M$.
+\theoremstyle{definition}
+\begin{definition}{\textit{Pushforward Operator between Manifolds.}}
+    Let $f:M\rightarrow N$ be a differentiable/smooth map between smooth manifolds $M$ and $N$, and let $p\in M$ (so then $f(p)\in N$). Then, the pushforward operator (at $p$) is given by
+    \begin{equation}
+        f_{*p}(c'(0)) = (f\circ c)'(0),
+    \end{equation}
+    where $c$ is a curve along $M$ with $c(0) = p$ (see the previous definition of tangent spaces).
 \end{definition}
+
+\begin{remark}
+    If some $f:M\rightarrow N$ is a mapping between some manifolds $M$ and $N$, then the pushforward $f_*:M\rightarrow N$ is a mapping between their tangent spaces, at $p\in M$ and $f(p)\in N$, respectively.
+\end{remark}
+
+\theoremstyle{definition}
+\begin{definition}{\textit{Vector Bundle.}}
+    An $n$-dimensional \textbf{vector bundle} is a five-tuple $\xi=(E,\pi,B,\oplus, \odot)$, where
+    \begin{enumerate}
+        \item $E$ is the \textbf{total space}
+        \item $B$ is the \textbf{base space}
+        \item $\pi:E\rightarrow B$ is a continuous map onto $B$
+        \item $\oplus$ and $\odot$ are operators defined to be analogous to addition and scalar multiplication, such that each \textbf{fiber} $\pi^{-1}(p)$ ($p\in E$) is an $n$-dimensional vector space over $\R$.
+    \end{enumerate}
+    \end{definition}
+    
+    \begin{remark}
+    Vector bundles, or bundles for short, are usually just notated $\pi: E\rightarrow B$, as the inclusion of $\oplus$ and $\odot$ to form the fiber vector spaces is treated as implicit.
+    \end{remark}
+
+\theoremstyle{definition}
+\begin{definition}{\textit{Tangent Bundle.}}
+    The \textbf{tangent bundle} $TM$ of a manifold $M$ is the (disjoint) union of all tangent spaces on $M$, i.e.
+    \begin{equation}
+        TM = \bigcup_{p\in M}T_pM,
+    \end{equation}
+    and is a type of vector bundle, defined with $\pi: TM \rightarrow M$.
+\end{definition}
+
+\theoremstyle{definition}
+\begin{definition}{\textit{Derivation.}}
+    For some manifold $M$, we can define a tangent vector at $p\in M$ to be a linear operator $\ell$, called a \textbf{derivation} at $p$, that operates on all $\Ci$ functions $f,g,\ldots$ such that
+    \begin{equation}
+        \ell(fg)(p) = f(p)\ell(g)(p) + g(p)\ell(f)(p).
+    \end{equation}
+\end{definition}
+
+\theoremstyle{definition}
+\begin{definition}{\textit{Partial Derivative.}}
+   Let $f:M\rightarrow \R$ for some smooth manifold $M$ with coordinate chart $(x,U)$. The \textbf{partial derivative} operator $\ell = \displaystyle\left.\pdv{}{x^i}\right|_p$ is a derivation, defined as
+   \begin{equation}
+    \displaystyle\left.\pdv{}{x^i}\right|_p = {\pdv{f}{x^i}} (p) = D_i(f\circ x^{-1})(x(p)).
+   \end{equation}
+\end{definition}
+
+\theoremstyle{theorem}
+\begin{theorem}{\textit{Partial Derivatives as a Basis for the Tangent Space.}}
+   Let $M^n$ be some $n-$dimensional smooth manifold, and let $(x,U)$ be some coordinate system around some $p\in M^n$. The set of all linear derivations at $p$ is an $n-$dimensional vector space, that is spanned by
+   the partial derivatives
+   \begin{equation}
+    \displaystyle\left.\pdv{}{x^1}\right|_p,\ldots,\displaystyle\left.\pdv{}{x^n}\right|_p.
+   \end{equation}
+   This set is equivalent to $T_pM$, and the set of all derivations at all points of $M$ is equivalent to the tangent bundle $TM$. As such, \textbf{the partial derivatives form a basis for the tangent space}.
+\end{theorem}
+
+\theoremstyle{definition}
+\begin{definition}{\textit{Section.}}
+    Let $\xi$ be some vector bundle defined by $\pi:E\rightarrow B$. Then a \textbf{section} of $\xi$ is a continuous map $s:B\rightarrow E$ such that 
+    \begin{equation}
+        \pi(s(x)) = x \quad \forall x\in B.
+    \end{equation}
+\end{definition}
+
+\begin{remark}
+    %A section $s$ of a bundle maps from the base space to the total space, picking out a point on the fiber over each point $p$ on the base. 
+    In the context of manifolds, as sections pick out points in the total space that lie above the point on the manifold they're mapping from, we can project back down with $\pi$ to recover the original point. Going back to the hairbrush analogy, if the projection map maps any point along a brush fiber to its base, then the section maps the point on the base to some point on the fiber.
+\end{remark}
  
 \end{multicols*}
 \end{document}
