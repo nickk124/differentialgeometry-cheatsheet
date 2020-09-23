@@ -17,6 +17,9 @@
 \theoremstyle{theorem}
 \newtheorem{theorem}{Theorem}[section]
 
+\theoremstyle{summary}
+\newtheorem*{summary}{Summary}
+
 \theoremstyle{remark}
 \newtheorem*{remark}{Remark}
 
@@ -82,10 +85,12 @@ Let $(X,\mathcal{J})$ and $(Y, \mathcal{K})$ be topological spaces. $(X,\mathcal
 \end{definition}
 
 \subsection{Some Linear Algebra}
+\theoremstyle{definition}
 \begin{definition}{\textit{Vector Space.}}
 A \textbf{vector space} $V$ is a set, or space, that is closed under addition and scalar multiplication, i.e. the result of performing these operations on some element(s) of $V$ is itself an element of $V$. We define elements of a vector space as \textbf{vectors}.
 \end{definition}
 
+\theoremstyle{definition}
 \begin{definition}{\textit{Basis.}}
 A \textbf{basis} for a vector space $V$ is a set of linearly independent vectors (i.e. none of the basis vectors can be written as linear combinations of the others) that span $V$ (i.e. any element of $V$ can be written as a linear combination of the basis vectors). In other words, the basis vectors define a ``coordinate system'' for $V$.
 \end{definition}
@@ -93,6 +98,16 @@ A \textbf{basis} for a vector space $V$ is a set of linearly independent vectors
 \begin{remark}
 You can convert vectors written in one basis to another via \textit{change-of-basis} matrices (or functions in the case of infinite-dimensional vectors).
 \end{remark}
+
+\theoremstyle{definition}
+\begin{definition}{\textit{Dual Space.}}
+Given some real vector space $V$, the \textbf{dual space} $V^*$ of $V$ is the vector space of all linear functions $f:V\rightarrow\R$.
+\end{definition}
+
+\begin{remark}
+    Broadly, when some dual vector $f\in V^*$ acts on some vector $v\in V$, the scalar $fv=f(v)$ provides some information about/``measures'' something about $v$.
+\end{remark}
+
 
 \subsection{Some Discrete Math}
 \begin{definition}{\textit{Equivalence Relation.}}
@@ -159,11 +174,11 @@ where $n$ and $m$ are the dimensionalities of Euclidean space that $U$ and $V$ a
 % add diffeomorphisms? only if needed later; this should be simple
 \end{definition}
 
-\begin{remark}
+\begin{summary}
 To summarize, a manifold is essentially a space that can be covered with coordinate charts, which are invertible, continuous mappings to some subset of $\Rn$. If the mapping between any pair of overlapping charts is differentiable, then the manifold itself is differentiable. 
 
 We usually don't explicitly notate the atlas of a (differentiable) manifold, i.e. $(M, \mathcal{A})$ vs. simply $M$.
-\end{remark}
+\end{summary}
 
 \section{The Tangent Bundle}
 
@@ -291,6 +306,7 @@ Vector bundles, or bundles for short, are usually just notated $\pi: E\rightarro
 
 \theoremstyle{theorem}
 \begin{theorem}{\textit{Partial Derivatives as a Basis for the Tangent Space.}}
+\label{thm_partialbases}
    Let $M^n$ be some $n-$dimensional smooth manifold, and let $(x,U)$ be some coordinate system around some $p\in M^n$. The set of all linear derivations at $p$ is an $n-$dimensional vector space, that is spanned by
    the partial derivatives
    \begin{equation}
@@ -307,10 +323,92 @@ Vector bundles, or bundles for short, are usually just notated $\pi: E\rightarro
     \end{equation}
 \end{definition}
 
+\theoremstyle{definition}
+\begin{definition}{\textit{Vector Field on a Manifold.}}
+\label{def_vectorfield}
+    A \textbf{vector field} on a smooth manifold $M$ is a smooth map 
+    \begin{equation}
+        X:M\rightarrow TM
+    \end{equation}
+    such that for any $p\in M, X(p) \in T_pM$. \textbf{A vector field is a section of a tangent bundle}.
+\end{definition}
+
 \begin{remark}
     %A section $s$ of a bundle maps from the base space to the total space, picking out a point on the fiber over each point $p$ on the base. 
     In the context of manifolds, as sections pick out points in the total space that lie above the point on the manifold they're mapping from, we can project back down with $\pi$ to recover the original point. Going back to the hairbrush analogy, if the projection map maps any point along a brush fiber to its base, then the section maps the point on the base to some point on the fiber.
 \end{remark}
+
+\begin{summary}
+    A tangent space is a vector space of all directional derivative operators at a given point on a manifold $M$. The tangent bundle is the (disjoint) union of all of the tangent spaces on the manifold, denoted $TM$. For some point on a manifold, the partial derivative operators (with respect to the coordinate system about that point) form a basis for the point's tangent space.
+\end{summary}
+
+\section{The Cotangent Bundle}
+
+\begin{remark}
+    All of the constructions that went into the tangent bundle $TM$ are built upon the fibers $\pi^{-1}(p)$, the vector space of all of the directional derivative operators passing through some $p\in M$. If we replace each $\pi^{-1}(p)$ with its dual space, then combine all of these vector spaces over $M$ as we did with the tangent spaces to make the tangent bundle, we will get another useful vector bundle.
+\end{remark}
+
+\theoremstyle{theorem}
+\begin{theorem}{\textit{Bases of Dual Spaces.}}
+\label{thm_dualbases}
+    Consider some finite dimensional vector space $V$ with dual $V^*$. The dimension of $V^*$ equals that of $V$. Furthermore, if $v_1\ldots v_n$ is a basis for $V$, then the elements $v_i^*\in V^*$ defined by
+    \begin{equation}
+        v^*_i(v_j) = \delta_j^i = 
+            \begin{cases}
+                1 & i = j\\
+                0 & i \neq j
+            \end{cases}
+    \end{equation}
+    form a basis for $V^*$.
+    % Consider some mapping $f:V\rightarrow W$. If $f$ is a linear transformation, then $\exists$ some other linear transformation $f^*:V^*\rightarrow W^*$ defined by
+    % \begin{equation}
+    %     (f^*\lambda)(v)=\lambda(fv),
+    % \end{equation}
+    % where $V^*$ is the (dual) space of all linear functions $\lambda:V\rightarrow\R$.
+\end{theorem}
+
+\theoremstyle{definition}
+\begin{definition}{\textit{Dual Vector Bundle.}}
+    Let $\xi$ be some vector bundle defined by $\pi: E\rightarrow B$, and let
+    \begin{equation}
+        E'=\bigcup\limits_{p\in B}\left[\pi^{-1}(p)\right]^*.
+    \end{equation}
+    If we define $\pi':E'\rightarrow B$ to take each $\left[\pi^{-1}(p)\right]^*$ to $p$, then we can construct a \textbf{dual bundle} $\xi^*$ from $\pi'$, whose fibers are $\left[\pi^{-1}(p)\right]^*$, the dual spaces to the fibers of $\xi$.
+\end{definition}
+
+\theoremstyle{definition}
+\begin{definition}{\textit{Cotangent Bundle.}}
+    Let $M$ be some smooth manifold with tangent bundle $TM$. Then the \textbf{cotangent bundle} of $M$, $T^*M$, is the dual bundle of $TM$. A fiber of $T^*M$ over some $p\in M$ is $T_p^*M = \left[\pi^{-1}(p)\right]^*$.
+\end{definition}
+
+\theoremstyle{definition}
+\begin{definition}{\textit{Differential.}}
+\label{def_differential}
+    Consider some smooth manifold $M$ and some smooth function $f:M\rightarrow \R$, with a vector field $X(p)\in T_pM$ given some $p\in M$. A $\Ci$/smooth section $df$ of $T^*M$ called the \textbf{differential} of $f$ can be defined by
+    \begin{equation}
+        df(p)(X) = X(f).
+    \end{equation}
+\end{definition}
+
+\theoremstyle{theorem}
+\begin{theorem}{\textit{Differentials as Bases for Cotangent Spaces.}}
+    Consider some smooth manifold $M$ with coordinate chart $(x, U)$ for some $p\in M$, with $x = (x^1,\ldots,x^n)$. The differentials $dx^i$ are sections of $T^*M$ over $U$.
+    From Theorems \ref{thm_partialbases} and \ref{thm_dualbases}, then 
+    \begin{equation}
+        dx^i(p)\left(\displaystyle\left.\pdv{}{x^j}\right|_p\right) = \delta_j^i,
+    \end{equation}
+    i.e. the differentials
+    \begin{equation}
+        dx^1(p), \ldots, dx^n(p)
+    \end{equation}
+    form a basis of $T^*_pM$, dual to the basis $\left.\pdv{}{x^1}\right|_p,\ldots,\left.\pdv{}{x^n}\right|_p$ of $T_pM$. As such, given some smooth function $f:M\rightarrow \R$, the section $df$ of $T^*_pM$ can be expressed as
+    \begin{equation}
+        df = \sum\limits_{i=1}^n\pdv{f}{x^i}dx^i,
+    \end{equation}
+    given Definitions \ref{def_vectorfield} and \ref{def_differential}.
+\end{theorem}
+
+\section{Tensor Fields}
  
 \end{multicols*}
 \end{document}
