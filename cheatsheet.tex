@@ -252,7 +252,8 @@ Vector bundles, or bundles for short, are usually just notated $\pi: E\rightarro
 \end{remark}
 
 \theoremstyle{definition}
-\begin{definition}{\textit{Pushforward Operator between Manifolds.}}
+\begin{definition}{\textit{Pushforward Operator on Manifolds.}}
+    \label{def_pushforward}
     Let $f:M\rightarrow N$ be a differentiable/smooth map between smooth manifolds $M$ and $N$, and let $p\in M$ (so then $f(p)\in N$). Then, the pushforward operator (at $p$) is given by
     \begin{equation}
         f_{*p}(c'(0)) = (f\circ c)'(0),
@@ -278,6 +279,12 @@ Vector bundles, or bundles for short, are usually just notated $\pi: E\rightarro
     \begin{remark}
     Vector bundles, or bundles for short, are usually just notated $\pi: E\rightarrow B$, as the inclusion of $\oplus$ and $\odot$ to form the fiber vector spaces is treated as implicit.
     \end{remark}
+
+
+\theoremstyle{definition}
+\begin{definition}{\textit{Bundle Map.}}
+
+\end{definition}
 
 \theoremstyle{definition}
 \begin{definition}{\textit{Tangent Bundle.}}
@@ -407,6 +414,58 @@ Vector bundles, or bundles for short, are usually just notated $\pi: E\rightarro
     \end{equation}
     given Definitions \ref{def_vectorfield} and \ref{def_differential}.
 \end{theorem}
+
+\theoremstyle{definition}
+\begin{definition}{\textit{Pullback Operator (on Manifolds).}}
+    Let $f:M\rightarrow N$ be a differentiable/smooth map between smooth manifolds $M$ and $N$, and let $p\in M$. Recall from Definition \ref{def_pushforward} that $\exists$ a pushforward operator $f_*:TM\rightarrow TN$ defined for a single $p\in M$ as $f_{*p} : T_pM\rightarrow T_{f(p)}N$. As $f_{*p}$ is a linear transformation between vector spaces, taking the dual of the spaces gives rise to the map between cotangent spaces
+    \begin{equation}
+        f_p^* : T_{f(p)}^* N\rightarrow T_p^*M,
+    \end{equation}
+    which we label as the \textbf{pullback operator}.
+\end{definition}
+
+\begin{remark}
+    Note that we can't just pull all of the $f_p^*$ together over all $p\in M$ as we did for the pushforward $f_{*p}$ to obtain a mapping between the cotangent bundles $T^*N$ and $T^*M$ (see Spivak pg. 113).
+\end{remark}
+
+\theoremstyle{theorem}
+\begin{theorem}{\textit{Sections of Cotangent Spaces.}}
+    Let $f:M\rightarrow N$ be a differentiable/smooth map between smooth manifolds $M$ and $N$. Given some section $\omega$ of $T^*N$, we can define a section $\eta$ of $T^*M$ as
+    \begin{equation}
+        \eta(p) = \omega (f(p)) \circ f_{*p}
+    \end{equation}
+    for some $p\in M$, i.e. for some vector field/section of $TM$, $X$,
+    \begin{equation}
+        \eta(p)X(p) = \omega(f(p))(f_{*p}X(p)).
+    \end{equation}
+\end{theorem}
+
+\begin{remark}
+    Intuitively what this means is that to operate on some vector at $p$ in $TM$, we push it over to $TN$ via $f_*$, then operate on it with $\omega$. 
+    
+    In summary, the \textit{pushforward} $f_{*p}$ maps from the tangent space of $M$ at $p$ to the tangent space of $N$ at $f(p)$. In turn, the \textit{pullback} $f_p^*$ maps from the space of sections of the cotangent bundle of $N$ to the space of sections of the cotangent bundle onf$M$.
+\end{remark}
+
+\theoremstyle{definition}
+\begin{definition}{\textit{Contravariant and Covariant Vector Fields.}}
+    A \textbf{contravariant vector field} is a vector field on some smooth manifold $M$, i.e. a section of $TM$. A \textbf{covariant vector field} is a section of $T^*M$.
+\end{definition}
+
+% \theoremstyle{theorem}
+% \begin{theorem}{\textit{Transformations of Coordinates and Differentials.}}
+%     Let $f:M\rightarrow N$ be a differentiable/smooth map between smooth manifolds $M$ and $N$. Given some section $\omega$ of $T^*N$, we can define a section $\eta$ of $T^*M$ as
+%     \begin{equation}
+%         \eta(p) = \omega (f(p)) \circ f_{*p}
+%     \end{equation}
+%     for some $p\in M$, i.e. for some vector field/section of $TM$, $X$,
+%     \begin{equation}
+%         \eta(p)X(p) = \omega(f(p))(f_{*p}X(p)).
+%     \end{equation}
+% \end{theorem}
+
+\begin{summary}
+    For some smooth manifold $M$, the cotangent bundle $T^*M$ is made out of the duals of the fibers of the tangent bundle $TM$, for all $p\in M$. Differentials are sections of $T^*M$, and form bases for cotangent spaces at points on $M$, just as their duals, partial derivatives, form bases for the corresponding tangent spaces. Just as the pushforward operator is used to map between tangent spaces of different manifolds, the pullback operator is used to map between spaces of sections of cotangent bundles. Contravariant vector fields are sections of $TM$, while covariant vector fields are sections of $T^*M$.
+\end{summary}
 
 \section{Tensor Fields}
  
