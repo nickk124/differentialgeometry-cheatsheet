@@ -2,6 +2,7 @@
 \usepackage{amssymb,amsmath,amsthm,amsfonts,commath,bm}
 \usepackage{multicol,multirow}
 \usepackage{physics}
+\usepackage{tikz-cd}
 \usepackage[landscape,margin=0.5in]{geometry}
 
 \title{A Differential Geometry Basics Cheat Sheet}
@@ -283,7 +284,20 @@ Vector bundles, or bundles for short, are usually just notated $\pi: E\rightarro
 
 \theoremstyle{definition}
 \begin{definition}{\textit{Bundle Map.}}
-
+    Consider some bundles $\xi_1$ and $\xi_2$, defined with $\pi_1: E_1\rightarrow B_1$ and $\pi_2: E_2\rightarrow B_2$, respectively. A \textbf{bundle map} from $\xi_1$ to $\xi_2$ is a pair of continuous maps $(\overline{f}, f)$ with
+    \begin{equation}
+        \overline{f}:E_1\rightarrow E_2 \qquad \text{and} \qquad f:B_1\rightarrow B_2
+    \end{equation}
+    such that:
+    \begin{enumerate}
+        \item The following diagram commutes:
+            \centering
+            \begin{tikzcd}
+                E_1 \arrow[r, "\overline{f}"] \arrow[d, "\pi_1"] & E_2 \arrow[d, "\pi_2"] \\
+                B_1 \arrow[r, "f"] & B_2
+            \end{tikzcd}
+        \item $\overline{f}:\pi_1^{-1}(p)\rightarrow f:\pi_2^{-1}(p)$ is a linear map for some $p\in B_1$.
+    \end{enumerate}
 \end{definition}
 
 \theoremstyle{definition}
@@ -416,7 +430,7 @@ Vector bundles, or bundles for short, are usually just notated $\pi: E\rightarro
 \end{theorem}
 
 \theoremstyle{definition}
-\begin{definition}{\textit{Pullback Operator (on Manifolds).}}
+\begin{definition}{\textit{Pullback Operator (on a Manifold).}}
     Let $f:M\rightarrow N$ be a differentiable/smooth map between smooth manifolds $M$ and $N$, and let $p\in M$. Recall from Definition \ref{def_pushforward} that $\exists$ a pushforward operator $f_*:TM\rightarrow TN$ defined for a single $p\in M$ as $f_{*p} : T_pM\rightarrow T_{f(p)}N$. As $f_{*p}$ is a linear transformation between vector spaces, taking the dual of the spaces gives rise to the map between cotangent spaces
     \begin{equation}
         f_p^* : T_{f(p)}^* N\rightarrow T_p^*M,
@@ -429,7 +443,7 @@ Vector bundles, or bundles for short, are usually just notated $\pi: E\rightarro
 \end{remark}
 
 \theoremstyle{theorem}
-\begin{theorem}{\textit{Sections of Cotangent Spaces.}}
+\begin{theorem}{\textit{Section of a Cotangent Space.}}
     Let $f:M\rightarrow N$ be a differentiable/smooth map between smooth manifolds $M$ and $N$. Given some section $\omega$ of $T^*N$, we can define a section $\eta$ of $T^*M$ as
     \begin{equation}
         \eta(p) = \omega (f(p)) \circ f_{*p}
@@ -463,11 +477,52 @@ Vector bundles, or bundles for short, are usually just notated $\pi: E\rightarro
 %     \end{equation}
 % \end{theorem}
 
+\begin{remark}
+    Covariant and contravariant vector fields, i.e. sections of $T^*M$ and $TM$, respectively, are also known as covariant and contravariant \textit{tensors} (or \textit{tensor fields}) of order $1$. We will dive into tensors in the following section.
+\end{remark}
+
 \begin{summary}
     For some smooth manifold $M$, the cotangent bundle $T^*M$ is made out of the duals of the fibers of the tangent bundle $TM$, for all $p\in M$. Differentials are sections of $T^*M$, and form bases for cotangent spaces at points on $M$, just as their duals, partial derivatives, form bases for the corresponding tangent spaces. Just as the pushforward operator is used to map between tangent spaces of different manifolds, the pullback operator is used to map between spaces of sections of cotangent bundles. Contravariant vector fields are sections of $TM$, while covariant vector fields are sections of $T^*M$.
 \end{summary}
 
-\section{Tensor Fields}
+\section{Tensors}
+
+\theoremstyle{definition}
+\begin{definition}{\textit{Multilinear Function.}}
+    Let $V_1,\ldots ,V_m$ be some collection of vector spaces. A function
+    \begin{equation}
+        T:V_1\times\cdots\times V_M\rightarrow \R
+    \end{equation}
+    is \textbf{multilinear} if $\forall i$ of $V_i$, if all input variables but $v_i\in V_i$ are held constant, $T$, i.e. $T(v_1,\ldots v_i,\ldots,v_m)$, is a linear function of $v_i$. In other words, the mapping
+    \begin{equation}
+        v_i\rightarrow T(v_1,\ldots,v_{i-1}, v_i, v_{i+1},\ldots,v_m)
+    \end{equation}
+    is linear for each choice of $v_1,\ldots,v_{i-1}, v_{i+1},\ldots,v_m$. The set of all such $T$ is a vector space.
+
+    If $V_i=V$ $\forall i$ for some $V$, this vector space is denoted $\mathcal{T}^m(V)$, the \textbf{space of all multilinear functions on $V$}.
+\end{definition}
+
+\begin{remark}
+    Note that $\mathcal{T}^1(V) = V^*$.
+\end{remark}
+
+\theoremstyle{definition}
+\begin{definition}{\textit{Multilinear Pullback Operator.}}
+    Let $V,W$ be vector spaces, and let $f:V\rightarrow W$ be some linear transformation. There exists a linear transformation $f^*\mathcal{T}^m(W)\rightarrow\mathcal{T}^m(V)$ defined as
+    \begin{equation}
+        f^*T(v_1,\ldots,v_m) = T(f(v_1),\ldots,f(v_m)),
+    \end{equation}
+    called the \textbf{multilinear pullback operator}.
+\end{definition}
+
+\theoremstyle{definition}
+\begin{definition}{\textit{Tensor Product.}}
+    Given some vector space $V$, for $T\in\mathcal{T}^k(V)$ and $S\in\mathcal{T}^\ell(V)$, the \textbf{tensor product} $T\otimes S\in\mathcal{T}^{k+\ell}(V)$ is defined by
+    \begin{align}
+        & T\otimes S (v_1,\ldots,v_k,v_{k+1},\ldots,v_{k+\ell}) \\
+        & = T(v_1,\ldots,v_k)\cdot S(v_{k+1},\ldots,v_{k+\ell}).
+    \end{align}
+\end{definition}
  
 \end{multicols*}
 \end{document}
