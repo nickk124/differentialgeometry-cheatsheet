@@ -472,6 +472,7 @@ Vector bundles, or bundles for short, are usually just notated $\pi: E\rightarro
 
 \theoremstyle{theorem}
 \begin{theorem}{\textit{Coordinate Transformations of Differentials.}}
+    \label{thm_coordtransdifferentials}
     Consider some linear coordinate system $x$ on $\Rn$ (i.e. $x$ is defined solely by linear transformations). If $x'$ is another such linear coordinate system, then by the definition of linear transformations, $x'^j=\sum\limits_{i=1}^na_{ij}x^i$ for some $a_{ij}$. In fact, $a_{ij} = \pdv{x'^j}{x^i}$ (as $\pdv{x'^j}{x^i}$ are elements of the Jacobian matrix $D(x'\circ x^{-1})$), so that
     \begin{equation}
         x'^j=\sum\limits_{i=1}^n\pdv{x'^j}{x^i}x^i.
@@ -505,14 +506,14 @@ Vector bundles, or bundles for short, are usually just notated $\pi: E\rightarro
     Note that $\mathcal{T}^1(V) = V^*$.
 \end{remark}
 
-\theoremstyle{definition}
-\begin{definition}{\textit{Multilinear Pullback Operator.}}
-    Let $V,W$ be vector spaces, and let $f:V\rightarrow W$ be some linear transformation. There exists a linear transformation $f^*\mathcal{T}^m(W)\rightarrow\mathcal{T}^m(V)$ defined as
-    \begin{equation}
-        f^*T(v_1,\ldots,v_m) = T(f(v_1),\ldots,f(v_m)),
-    \end{equation}
-    called the \textbf{multilinear pullback operator}.
-\end{definition}
+% \theoremstyle{definition}
+% \begin{definition}{\textit{Multilinear Pullback Operator.}}
+%     Let $V,W$ be vector spaces, and let $f:V\rightarrow W$ be some linear transformation. There exists a linear transformation $f^*\mathcal{T}^m(W)\rightarrow\mathcal{T}^m(V)$ defined as
+%     \begin{equation}
+%         f^*T(v_1,\ldots,v_m) = T(f(v_1),\ldots,f(v_m)),
+%     \end{equation}
+%     called the \textbf{multilinear pullback operator}.
+% \end{definition}
 
 \theoremstyle{definition}
 \begin{definition}{\textit{Tensor Product.}}
@@ -571,16 +572,70 @@ Vector bundles, or bundles for short, are usually just notated $\pi: E\rightarro
 
 \theoremstyle{definition}
 \begin{definition}{\textit{Covariant Tensor Field.}}
-    Consider some smooth manifold $M$ with covariant tensor bundle $\mathcal{T}^k(TM)$. A section of $\mathcal{T}^k(TM)$ is called a \textbf{covariant tensor field of order $\bm{k}$}. From Theorem \ref{thm_basesforcovariantspacepoint}, given some coordinate system $(x ,U)$ about some $p\in M$ we can write every covariant tensor field $A$ of order $k$ as
+    Consider some smooth manifold $M$ with covariant tensor bundle $\mathcal{T}^k(TM)$. A section of $\mathcal{T}^k(TM)$ is called a \textbf{covariant tensor field of order $\bm{k}$}. From Theorem \ref{thm_basesforcovariantspacepoint}, given some $k$-dimensional coordinate system $(x ,U)$ about some $p\in M$ we can write every covariant tensor field $A$ of order $k$ as
     \begin{equation}
-        A(p) = \sum\limits_{i_1,\ldots,i_k}A_{i_1,\ldots,i_k}(p)dx^{i_1}(p)\otimes\cdots\otimes dx^{i_k}(p)
+        A(p) = \sum\limits_{i_1,\ldots,i_k}A_{i_1\cdots i_k}(p)dx^{i_1}(p)\otimes\cdots\otimes dx^{i_k}(p)
     \end{equation}
-    given some functions $A_{i_1,\ldots,i_k}$, or simply
+    given some functions $A_{i_1,\ldots,i_k}$ (which will be defined shortly), or simply
     \begin{equation}
-        A = \sum\limits_{i_1,\ldots,i_k}A_{i_1,\ldots,i_k}dx^{i_1}\otimes\cdots\otimes dx^{i_k},
+        A = \sum\limits_{i_1,\ldots,i_k}A_{i_1\cdots i_k}dx^{i_1}\otimes\cdots\otimes dx^{i_k},
     \end{equation}
-    removing any explicit notation of coordinate system.
+    removing any explicit indication of coordinate system.
 \end{definition}
+
+\theoremstyle{theorem}
+\begin{theorem}{\textit{Coordinate Transformations of Covariant Tensors.}}
+    Consider some smooth manifold $M$ with $k$-dimensional coordinate system $x$ about some $p\in M$, and covariant tensor field of order $k$
+    \begin{equation}
+        A = \sum\limits_{i_1,\ldots,i_k}A_{i_1\ldots i_k}dx^{i_1}\otimes\cdots\otimes dx^{i_k}.
+    \end{equation}
+    If we also have
+    \begin{equation}
+        A = \sum\limits_{i_1,\ldots,i_k}A'_{i_1\ldots i_k}dx'^{i_1}\otimes\cdots\otimes dx'^{i_k}.
+    \end{equation}
+    given some other $k$-dimensional coordinate system $x'$ about $p$, then the functions $A'_{i_1\cdots i_k}$ can be found with
+    \begin{equation}
+        A'_{\alpha_1\cdots\alpha_k} = \sum\limits_{i_1,\ldots,i_k}A_{i_1\ldots i_k} \pdv{x^{i_1}}{x'^{\alpha_1}}\cdots\pdv{x^{i_k}}{x'^{\alpha_k}},
+    \end{equation}
+    following Theorem \ref{thm_coordtransdifferentials} and the definition (and multilinearity) of the tensor product $\otimes$.
+\end{theorem}
+
+\theoremstyle{theorem}
+\begin{theorem}{\textit{Covariant Tensors as Operations Over Contravariant Vector Fields.}}
+    Consider some $k$ vector fields $X_1,\ldots,X_k$ on a smooth manifold $M$, with some $p\in M$. A covariant tensor field $A$ of order $k$ on $M$ can be thought of as an operation $\overline{A}$ on the vector fields that returns a function, i.e.
+    \begin{equation}
+        \overline{A}(X_1,\ldots,X_k)(p) = A(p)(X_1(p),\ldots,X_k(p)).
+    \end{equation}
+    
+    Now, let $\mathcal{V}$ be the set of all $\Ci$ vector fields on $M$, and $\mathcal{F}$ be the set of all $\Ci$ functions. Then if the function
+    \begin{equation}
+        \mathcal{A}:\mathcal{V}\times\cdots\times\mathcal{V}\rightarrow\mathcal{F}
+    \end{equation}
+    is linear over $\mathcal{F}$, then $\exists$ a unique tensor field $A$, with $\alpha=\overline{A}$.
+\end{theorem}
+
+\begin{remark}
+    Because of the preceding result, we never distinguish between the tensor field $A$ and the aforementioned operation $\overline{A}$.
+\end{remark}
+
+\theoremstyle{definition}
+\begin{definition}{\textit{Tensor Product of Tensor Fields.}}
+
+\end{definition}
+
+\theoremstyle{definition}
+\begin{definition}{\textit{Contravariant Tensor Field.}}
+    
+\end{definition}
+
+\theoremstyle{theorem}
+\begin{theorem}{\textit{Coordinate Transformations of Contravariant Tensors.}}
+    
+\end{theorem}
+
+\theoremstyle{theorem}
+\begin{theorem}{\textit{Contravariant Tensors as Operations Over Covariant Vector Fields.}}
+\end{theorem}
  
 \end{multicols*}
 \end{document}
