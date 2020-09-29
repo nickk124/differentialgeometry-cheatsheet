@@ -3,6 +3,7 @@
 \usepackage{multicol,multirow}
 \usepackage{physics}
 \usepackage{tikz-cd}
+\usepackage{hyperref}
 \usepackage[landscape,margin=0.5in]{geometry}
 
 \title{A Differential Geometry Basics Cheat Sheet}
@@ -244,10 +245,6 @@ In other words, the pushforward operator $f_*$ takes a directional derivative op
     Think of $T_p$ as the (vector) space of all possible directions through which $p$ can be passed through ``tangential'' to $M$. Note that $T_pM$ does \textit{not} depend on the choice of coordinate system $x$. 
 \end{remark}
 
-% \begin{remark}
-%     The definition for such tangent spaces found within Spivak is too long for this sheet; as such
-% \end{remark}
-
 \begin{remark}
 Vector bundles, or bundles for short, are usually just notated $\pi: E\rightarrow B$, as the inclusion of $\oplus$ and $\odot$ to form the fiber vector spaces is treated as implicit.
 \end{remark}
@@ -381,15 +378,11 @@ Vector bundles, or bundles for short, are usually just notated $\pi: E\rightarro
             \end{cases}
     \end{equation}
     form a basis for $V^*$.
-    % Consider some mapping $f:V\rightarrow W$. If $f$ is a linear transformation, then $\exists$ some other linear transformation $f^*:V^*\rightarrow W^*$ defined by
-    % \begin{equation}
-    %     (f^*\lambda)(v)=\lambda(fv),
-    % \end{equation}
-    % where $V^*$ is the (dual) space of all linear functions $\lambda:V\rightarrow\R$.
 \end{theorem}
 
 \theoremstyle{definition}
 \begin{definition}{\textit{Dual Vector Bundle.}}
+    \label{def_dualbundle}
     Let $\xi$ be some vector bundle defined by $\pi: E\rightarrow B$, and let
     \begin{equation}
         E'=\bigcup\limits_{p\in B}\left[\pi^{-1}(p)\right]^*.
@@ -399,7 +392,8 @@ Vector bundles, or bundles for short, are usually just notated $\pi: E\rightarro
 
 \theoremstyle{definition}
 \begin{definition}{\textit{Cotangent Bundle.}}
-    Let $M$ be some smooth manifold with tangent bundle $TM$. Then the \textbf{cotangent bundle} of $M$, $T^*M$, is the dual bundle of $TM$. A fiber of $T^*M$ over some $p\in M$ is $T_p^*M = \left[\pi^{-1}(p)\right]^*$.
+    \label{def_cotangentbundle}
+    Let $M$ be some smooth manifold with tangent bundle $TM$. Then the \textbf{cotangent bundle} of $M$, $T^*M$, is the dual bundle of $TM$. A fiber of $T^*M$ over some $p\in M$ is $T_p^*M = \left[\pi^{-1}(p)\right]^*$, known as a \textbf{cotangent space} at $p$.
 \end{definition}
 
 \theoremstyle{definition}
@@ -413,6 +407,7 @@ Vector bundles, or bundles for short, are usually just notated $\pi: E\rightarro
 
 \theoremstyle{theorem}
 \begin{theorem}{\textit{Differentials as Bases for Cotangent Spaces.}}
+    \label{thm_differentialsbasiscotangentspaces}
     Consider some smooth manifold $M$ with coordinate chart $(x, U)$ for some $p\in M$, with $x = (x^1,\ldots,x^n)$. The differentials $dx^i$ are sections of $T^*M$ over $U$.
     From Theorems \ref{thm_partialbases} and \ref{thm_dualbases}, then 
     \begin{equation}
@@ -465,18 +460,6 @@ Vector bundles, or bundles for short, are usually just notated $\pi: E\rightarro
     A \textbf{contravariant vector field} is a vector field on some smooth manifold $M$, i.e. a section of $TM$. A \textbf{covariant vector field} is a section of $T^*M$.
 \end{definition}
 
-% \theoremstyle{theorem}
-% \begin{theorem}{\textit{Transformations of Coordinates and Differentials.}}
-%     Let $f:M\rightarrow N$ be a differentiable/smooth map between smooth manifolds $M$ and $N$. Given some section $\omega$ of $T^*N$, we can define a section $\eta$ of $T^*M$ as
-%     \begin{equation}
-%         \eta(p) = \omega (f(p)) \circ f_{*p}
-%     \end{equation}
-%     for some $p\in M$, i.e. for some vector field/section of $TM$, $X$,
-%     \begin{equation}
-%         \eta(p)X(p) = \omega(f(p))(f_{*p}X(p)).
-%     \end{equation}
-% \end{theorem}
-
 \begin{remark}
     Covariant and contravariant vector fields, i.e. sections of $T^*M$ and $TM$, respectively, are also known as covariant and contravariant \textit{tensors} (or \textit{tensor fields}) of order $1$. We will dive into tensors in the following section.
 \end{remark}
@@ -486,6 +469,22 @@ Vector bundles, or bundles for short, are usually just notated $\pi: E\rightarro
 \end{summary}
 
 \section{Tensors}
+
+\theoremstyle{theorem}
+\begin{theorem}{\textit{Coordinate Transformations of Differentials.}}
+    Consider some linear coordinate system $x$ on $\Rn$ (i.e. $x$ is defined solely by linear transformations). If $x'$ is another such linear coordinate system, then by the definition of linear transformations, $x'^j=\sum\limits_{i=1}^na_{ij}x^i$ for some $a_{ij}$. In fact, $a_{ij} = \pdv{x'^j}{x^i}$ (as $\pdv{x'^j}{x^i}$ are elements of the Jacobian matrix $D(x'\circ x^{-1})$), so that
+    \begin{equation}
+        x'^j=\sum\limits_{i=1}^n\pdv{x'^j}{x^i}x^i.
+    \end{equation}
+    Then, from Theorem \ref{thm_differentialsbasiscotangentspaces}, we have that
+    \begin{equation}
+        dx'^j=\sum\limits_{i=1}^n\pdv{x'^j}{x^i}dx^i.
+    \end{equation}
+\end{theorem}
+
+\begin{remark}
+    Essentially what the preceding theorem means is that the differentials $dx^i$ change in the ``same way'' as the coordinates $x^i$, described as being \textbf{covariant}.
+\end{remark}
 
 \theoremstyle{definition}
 \begin{definition}{\textit{Multilinear Function.}}
@@ -499,7 +498,7 @@ Vector bundles, or bundles for short, are usually just notated $\pi: E\rightarro
     \end{equation}
     is linear for each choice of $v_1,\ldots,v_{i-1}, v_{i+1},\ldots,v_m$. The set of all such $T$ is a vector space.
 
-    If $V_i=V$ $\forall i$ for some $V$, this vector space is denoted $\mathcal{T}^m(V)$, the \textbf{space of all multilinear functions on $V$}.
+    If $V_i=V$ $\forall i$ for some $V$, this vector space is denoted $\mathcal{T}^m(V)$, the \textbf{space of all multilinear functions on $\bm{V}$}.
 \end{definition}
 
 \begin{remark}
@@ -517,11 +516,70 @@ Vector bundles, or bundles for short, are usually just notated $\pi: E\rightarro
 
 \theoremstyle{definition}
 \begin{definition}{\textit{Tensor Product.}}
-    Given some vector space $V$, for $T\in\mathcal{T}^k(V)$ and $S\in\mathcal{T}^\ell(V)$, the \textbf{tensor product} $T\otimes S\in\mathcal{T}^{k+\ell}(V)$ is defined by
+    Given some vector space $V$, for some $T\in\mathcal{T}^k(V)$ and $S\in\mathcal{T}^\ell(V)$, the \textbf{tensor product} $T\otimes S\in\mathcal{T}^{k+\ell}(V)$ is defined by
     \begin{align}
         & T\otimes S (v_1,\ldots,v_k,v_{k+1},\ldots,v_{k+\ell}) \\
         & = T(v_1,\ldots,v_k)\cdot S(v_{k+1},\ldots,v_{k+\ell}).
     \end{align}
+\end{definition}
+
+\theoremstyle{theorem}
+\begin{theorem}{\textit{Bases for Multilinear Function Spaces.}}
+    \label{thm_basismultilinear}
+    Consider a vector space $V$ with basis $v_1,\ldots,v_n$, and let $T, S, U$ be some multilinear functions defined on $V$. Note that the tensor product $\otimes$ is associative, i.e. $(S\otimes T)\otimes U = S\otimes (T\otimes U)$. 
+    
+    If $v_1^*,\ldots v_n^*$ is the dual basis for $V^*=\mathcal{T}^1(V)$, then the elements
+    \begin{equation}
+        v_{i_1}^*\otimes\cdots\otimes v_{i_k}^* \qquad 1\leq i_1,\ldots,i_k\leq n,
+    \end{equation}
+    with all possible $\binom{n}{k}$ choices for $(i_1,\ldots,i_k)$ from $(1,\ldots, n)$, form a basis for $\mathcal{T}^k(V)$, which has dimension $n^k$, using the aforementioned associativity to define such an $k$-fold tensor product.
+\end{theorem}
+
+\begin{remark}
+    Similarly to how we used the dual space to build the cotangent bundle (Definitions \ref{def_dualbundle} and \ref{def_cotangentbundle}), we can use this multilinear function space to define a new bundle.
+\end{remark}
+
+\theoremstyle{definition}
+\begin{definition}{\textit{Covariant Tensor Bundle.}}
+    Let $\xi$ be some vector bundle defined by $\pi: E\rightarrow B$, and let
+    \begin{equation}
+        E'=\bigcup\limits_{p\in B}\mathcal{T}^k\left(\pi^{-1}(p)\right).
+    \end{equation}
+    If we define $\pi':E'\rightarrow B$ to take each $\mathcal{T}^k\left(\pi^{-1}(p)\right)$ to $p$, then we can construct a bundle $\mathcal{T}^k(\xi)$ defined by $\pi':E'\rightarrow B$.
+
+    Considering the tangent bundle $TM$ of some smooth manifold $M$, the bundle $\mathcal{T}^k(TM)$ is called the \textbf{covariant tensor bundle of order $\bm{k}$}.
+\end{definition}
+
+\begin{remark}
+    From the preceding definition, note that the dual bundle $\xi^*$ is the special case of $k=1$ for $\mathcal{T}^k(\xi)$.
+\end{remark}
+
+\theoremstyle{theorem}
+\begin{theorem}{\textit{Products of Differentials as Bases for $\mathcal{T}^k(T_pM)$.}}
+    \label{thm_basesforcovariantspacepoint}
+    Given some smooth manifold $M$, consider some coordinate system $(x ,U)$ about some $p\in M$. From Theorem \ref{thm_differentialsbasiscotangentspaces}, then the differentials
+    \begin{equation}
+        dx^1(p), \ldots, dx^n(p)
+    \end{equation}
+    form a basis for the cotangent space $T_p^*M$. Then from Theorem \ref{thm_basismultilinear}, the $k$-fold tensor products
+    \begin{align}
+        & dx^{i_1}(p)\otimes\cdots\otimes dx^{i_k}(p)\in\mathcal{T}^k(T_pM),\\
+        & 1\leq i_1,\ldots,i_k\leq n
+    \end{align}
+    form a basis for $\mathcal{T}^k(T_pM)$.
+\end{theorem}
+
+\theoremstyle{definition}
+\begin{definition}{\textit{Covariant Tensor Field.}}
+    Consider some smooth manifold $M$ with covariant tensor bundle $\mathcal{T}^k(TM)$. A section of $\mathcal{T}^k(TM)$ is called a \textbf{covariant tensor field of order $\bm{k}$}. From Theorem \ref{thm_basesforcovariantspacepoint}, given some coordinate system $(x ,U)$ about some $p\in M$ we can write every covariant tensor field $A$ of order $k$ as
+    \begin{equation}
+        A(p) = \sum\limits_{i_1,\ldots,i_k}A_{i_1,\ldots,i_k}(p)dx^{i_1}(p)\otimes\cdots\otimes dx^{i_k}(p)
+    \end{equation}
+    given some functions $A_{i_1,\ldots,i_k}$, or simply
+    \begin{equation}
+        A = \sum\limits_{i_1,\ldots,i_k}A_{i_1,\ldots,i_k}dx^{i_1}\otimes\cdots\otimes dx^{i_k},
+    \end{equation}
+    removing any explicit notation of coordinate system.
 \end{definition}
  
 \end{multicols*}
