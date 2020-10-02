@@ -468,7 +468,7 @@ Vector bundles, or bundles for short, are usually just notated $\pi: E\rightarro
     For some smooth manifold $M$, the cotangent bundle $T^*M$ is made out of the duals of the fibers of the tangent bundle $TM$, for all $p\in M$. Differentials are sections of $T^*M$, and form bases for cotangent spaces at points on $M$, just as their duals, partial derivatives, form bases for the corresponding tangent spaces. Just as the pushforward operator is used to map between tangent spaces of different manifolds, the pullback operator is used to map between spaces of sections of cotangent bundles. Contravariant vector fields are sections of $TM$, while covariant vector fields are sections of $T^*M$.
 \end{summary}
 
-\section{Tensors}
+\section{Tensors, Part 1}
 
 \theoremstyle{theorem}
 \begin{theorem}{\textit{Coordinate Transformations of Differentials.}}
@@ -602,6 +602,7 @@ Vector bundles, or bundles for short, are usually just notated $\pi: E\rightarro
 
 \theoremstyle{theorem}
 \begin{theorem}{\textit{Covariant Tensors as Operations Over Contravariant Vector Fields.}}
+    \label{thm_covtensorsoperations}
     Consider some $k$ vector fields $X_1,\ldots,X_k$ on a smooth manifold $M$, with some $p\in M$. A covariant tensor field $A$ of order $k$ on $M$ can be thought of as an operation $\overline{A}$ on the vector fields that returns a function, i.e.
     \begin{equation}
         \overline{A}(X_1,\ldots,X_k)(p) = A(p)(X_1(p),\ldots,X_k(p)).
@@ -619,13 +620,23 @@ Vector bundles, or bundles for short, are usually just notated $\pi: E\rightarro
 \end{remark}
 
 \theoremstyle{definition}
-\begin{definition}{\textit{Tensor Product of Tensor Fields.}}
-
+\begin{definition}{\textit{Tensor Product of Covariant Tensor Fields.}}
+    Consider covariant tensor fields $A$, $B$ of order $k$ and $\ell$ respectively, on a smooth manifold $M$ with some $p\in M$. Resulting from Theorem \ref{thm_covtensorsoperations}, we can define a new covariant tensor field $A\otimes B$ of order $k+\ell$ as
+    \begin{equation}
+        (A\otimes B)(p) = A(p)\otimes B(p),
+    \end{equation}
+    which operates on $\underbrace{T_pM\times\cdots\times T_pM}_{k+\ell\text{ times}}$.
 \end{definition}
+
+\begin{remark}
+    In preparation of defining contravariant tensor fields, first recall that given some smooth manifold $M$, a contravariant \textit{vector} field is a section $X$ of $TM$, i.e. each $X(p)\in T_pM$ for some $p\in M$.
+\end{remark}
+
+\section{Tensors, Part 2}
 
 \theoremstyle{definition}
 \begin{definition}{\textit{Contravariant Tensor Field.}}
-    
+    Consider some smooth manifold $M$ with some $p\in M$. A \textbf{contravariant tensor field of order $\bm{k}$} is a section $A$ of the bundle $\mathcal{T}^k(T^*M)$. As such, each $A(p)$ is a $k$-linear function of $T_p^*M$
 \end{definition}
 
 \theoremstyle{theorem}
