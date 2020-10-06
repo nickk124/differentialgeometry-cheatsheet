@@ -580,11 +580,12 @@ Vector bundles, or bundles for short, are usually just notated $\pi: E\rightarro
     \begin{equation}
         A = \sum\limits_{i_1,\ldots,i_k}A_{i_1\cdots i_k}dx^{i_1}\otimes\cdots\otimes dx^{i_k},
     \end{equation}
-    removing any explicit indication of coordinate system.
+    removing any explicit indication of $p$.
 \end{definition}
 
 \theoremstyle{theorem}
 \begin{theorem}{\textit{Coordinate Transformations of Covariant Tensors.}}
+    \label{thm_covariantcoordtrans}
     Consider some smooth manifold $M$ with $k$-dimensional coordinate system $x$ about some $p\in M$, and covariant tensor field of order $k$
     \begin{equation}
         A = \sum\limits_{i_1,\ldots,i_k}A_{i_1\ldots i_k}dx^{i_1}\otimes\cdots\otimes dx^{i_k}.
@@ -612,7 +613,7 @@ Vector bundles, or bundles for short, are usually just notated $\pi: E\rightarro
     \begin{equation}
         \mathcal{A}:\mathcal{V}\times\cdots\times\mathcal{V}\rightarrow\mathcal{F}
     \end{equation}
-    is linear over $\mathcal{F}$, then $\exists$ a unique tensor field $A$, with $\alpha=\overline{A}$.
+    is linear over $\mathcal{F}$, then $\exists$ a unique tensor field $A$, with $\alpha=\overline{A}$. 
 \end{theorem}
 
 \begin{remark}
@@ -637,15 +638,38 @@ Vector bundles, or bundles for short, are usually just notated $\pi: E\rightarro
 \theoremstyle{definition}
 \begin{definition}{\textit{Contravariant Tensor Field.}}
     Consider some smooth manifold $M$ with some $p\in M$. A \textbf{contravariant tensor field of order $\bm{k}$} is a section $A$ of the bundle $\mathcal{T}^k(T^*M)$. As such, each $A(p)$ is a $k$-linear function of $T_p^*M$
+
+    Now, from Theorem \ref{thm_partialbases}, given some $k$-dimensional coordinate system $(x, U)$ about $p$, we can write $A(p)$ as
+    \begin{equation}
+        A(p) = \sum\limits_{j_1,\ldots,j_k}A^{j_1\cdots j_k}(p)\left.\pdv{}{x^{j_1}}\right|_p\otimes\cdots\otimes\left.\pdv{}{x^{j_k}}\right|_p,
+    \end{equation}
+    or simply
+    \begin{equation}
+        A = \sum\limits_{j_1,\ldots,j_k}A^{j_1\cdots j_k}\pdv{}{x^{j_1}}\otimes\cdots\otimes\pdv{}{x^{j_k}},
+    \end{equation}
+    recalling that each $\left.\pdv{}{x^{j}}\right|_p$ operates on $T_p^*M$.
 \end{definition}
 
 \theoremstyle{theorem}
 \begin{theorem}{\textit{Coordinate Transformations of Contravariant Tensors.}}
-    
+    Consider some smooth manifold $M$ with $k$-dimensional coordinate system about some $p\in M$, and contravariant tensor field of order $k$
+    \begin{equation}
+        A = \sum\limits_{j_1,\ldots,j_k}A^{j_1\cdots j_k}\pdv{}{x^{j_1}}\otimes\cdots\otimes\pdv{}{x^{j_k}}.
+    \end{equation}
+    If we can also write $A$ with some other coordinate system $x'$, then following the same logic as in Theorem \ref{thm_covariantcoordtrans}, then the functions $A'^{\beta_1\cdots\beta_k}$ used to write $A$ with respect to $x'$ can be found with
+    \begin{equation}
+        A'^{\beta_1\cdots\beta_k} = \sum\limits_{j_1,\ldots,j_k}A^{j_1\cdots j_k}\pdv{x'^{\beta_1}}{x^{j_1}}\cdots\pdv{x'^{\beta_1}}{x^{j_1}}.
+    \end{equation}
+
 \end{theorem}
 
 \theoremstyle{theorem}
 \begin{theorem}{\textit{Contravariant Tensors as Operations Over Covariant Vector Fields.}}
+    Let $A$ be a contravariant tensor field of order $k$ with some $k$-dimensional coordinate system, about some $p$ in a smooth manifold $M$. We can write $A$ as an operator/function $\overline{A}$ that takes $k$ covariant vector fields $\omega_1,\ldots,\omega_k$ as arguments, i.e
+    \begin{equation}
+        \overline{A}(\omega_1,\ldots,\omega_k)(p) = A(p)(\omega_1(p),\ldots,\omega_k(p)).
+    \end{equation}
+    Similarly to Theorem \ref{thm_covtensorsoperations}, we can avoid distinguishing between $A$ and $\overline{A}$ if $\overline{A}$ is linear over $\mathcal{F}$, the set of all $\Ci$ functions.
 \end{theorem}
  
 \end{multicols*}
