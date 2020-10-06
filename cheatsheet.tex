@@ -576,7 +576,7 @@ Vector bundles, or bundles for short, are usually just notated $\pi: E\rightarro
     \begin{equation}
         A(p) = \sum\limits_{i_1,\ldots,i_k}A_{i_1\cdots i_k}(p)dx^{i_1}(p)\otimes\cdots\otimes dx^{i_k}(p)
     \end{equation}
-    given some functions $A_{i_1,\ldots,i_k}$ (which will be defined shortly), or simply
+    given some functions/\textbf{components} $A_{i_1,\ldots,i_k}$ (which will be defined shortly), or simply
     \begin{equation}
         A = \sum\limits_{i_1,\ldots,i_k}A_{i_1\cdots i_k}dx^{i_1}\otimes\cdots\otimes dx^{i_k},
     \end{equation}
@@ -652,11 +652,12 @@ Vector bundles, or bundles for short, are usually just notated $\pi: E\rightarro
 
 \theoremstyle{theorem}
 \begin{theorem}{\textit{Coordinate Transformations of Contravariant Tensors.}}
+    \label{thm_contravariantcoordtrans}
     Consider some smooth manifold $M$ with $k$-dimensional coordinate system about some $p\in M$, and contravariant tensor field of order $k$
     \begin{equation}
         A = \sum\limits_{j_1,\ldots,j_k}A^{j_1\cdots j_k}\pdv{}{x^{j_1}}\otimes\cdots\otimes\pdv{}{x^{j_k}}.
     \end{equation}
-    If we can also write $A$ with some other coordinate system $x'$, then following the same logic as in Theorem \ref{thm_covariantcoordtrans}, then the functions $A'^{\beta_1\cdots\beta_k}$ used to write $A$ with respect to $x'$ can be found with
+    If we can also write $A$ with some other coordinate system $x'$, then following the same logic as in Theorem \ref{thm_covariantcoordtrans}, then the functions/\textbf{components} $A'^{\beta_1\cdots\beta_k}$ used to write $A$ with respect to $x'$ can be found with
     \begin{equation}
         A'^{\beta_1\cdots\beta_k} = \sum\limits_{j_1,\ldots,j_k}A^{j_1\cdots j_k}\pdv{x'^{\beta_1}}{x^{j_1}}\cdots\pdv{x'^{\beta_1}}{x^{j_1}}.
     \end{equation}
@@ -671,6 +672,56 @@ Vector bundles, or bundles for short, are usually just notated $\pi: E\rightarro
     \end{equation}
     Similarly to Theorem \ref{thm_covtensorsoperations}, we can avoid distinguishing between $A$ and $\overline{A}$ if $\overline{A}$ is linear over $\mathcal{F}$, the set of all $\Ci$ functions.
 \end{theorem}
+
+\begin{remark}
+    We've covered both covariant and contravariant tensor fields; however, we can go further to define \textit{mixed} tensor fields, which are, in a way, a (non-mathematical) intersection between these two types of tensors.
+\end{remark}
+
+\theoremstyle{definition}
+\begin{definition}{\textit{Mixed Tensor Fields.}}
+    Consider some vector field $V$ with dual $V^*$. Define $\mathcal{T}_\ell^k$(V) to be the set of all $(k+\ell)$-linear functions
+    \begin{equation}
+        T:\underbrace{V\otimes\cdots\otimes V}_{k\text{ times}}\times\underbrace{V^*\otimes\cdots\otimes V^*}_{\ell\text{ times}}\rightarrow\R .
+    \end{equation}
+    
+    For any bundle $\xi$, we can create a bundle $\mathcal{T}_\ell^k(\xi)$ by replacing each fiber $\pi^{-1}(p)$ of $\xi$ ($p\in B$, where $B$ is the base space of $\xi$) with $\mathcal{T}_\ell^k(\pi^{-1}(p))$. Given some smooth manifold $M$, sections of $\mathcal{T}_\ell^k(TM)$ are called \textbf{tensor fields, covariant of order $\bm{k}$ and contravariant of order $\bm{\ell}$}, or \textbf{of type $\binom{\bm{k}}{\bm{\ell}}$} for short.
+
+    A tensor field $A$ of type $\binom{k}{\ell}$ can be written as
+    \begin{equation}
+        A = \sum\limits_{
+            \substack{
+                i_1,\ldots,i_k\\
+                j_1,\ldots,j_\ell
+            }
+        } A_{i_1\cdots i_k}^{j_1\cdots j_\ell}dx^{i_1}\otimes\cdots\otimes dx^{i_k}\pdv{}{x^{j_1}}\otimes\cdots\otimes\pdv{}{x^{j_\ell}},
+    \end{equation}
+    a monstrosity that could barely fit into this column.
+\end{definition}
+
+\begin{theorem}{\textit{Coordinate Transformations of Mixed Tensors.}}
+    \label{thm_mixedcoordtrans}
+    Following the logic of Theorems \ref{thm_covariantcoordtrans} and \ref{thm_contravariantcoordtrans}, given some mixed tensor $A$ of type $\binom{k}{\ell}$ that can be written both with some coordinate systems $x$ and $x'$, the functions/\textbf{components} ${A'}_{\alpha_1\cdots \alpha_k}^{\beta_1\cdots \beta_\ell}$ can be found with
+    \begin{equation}
+        {A'}_{\alpha_1\cdots \alpha_k}^{\beta_1\cdots \beta_\ell} = \hspace{-0.5em}\sum\limits_{
+            \substack{
+                i_1,\ldots,i_k\\
+                j_1,\ldots,j_\ell
+            }
+        } A_{i_1\cdots i_k}^{j_1\cdots j_\ell}\pdv{x^{i_1}}{x'^{\alpha_1}}\cdots\pdv{x^{i_k}}{x'^{\alpha_k}}\pdv{x'^{\beta_1}}{x^{j_1}}\cdots\pdv{x'^{\beta_\ell}}{x^{j_\ell}}.
+    \end{equation}
+\end{theorem}
+
+\theoremstyle{definition}
+\begin{definition}{\textit{Contraction of a Tensor.}}
+    Consider some tensor $A$ of type $\binom{k}{\ell}$ with $k,\ell\geq 1$ that has components of $A_{i_1\cdots i_k}^{j_1\cdots j_\ell}$ as in Theorem \ref{thm_mixedcoordtrans}. There is then a tensor of type $\binom{k-1}{\ell-1}$ with components of
+    \begin{equation}
+        \sum\limits_{\alpha=1}^nA_{i_1\cdots i_{k-1}\alpha}^{j_1\cdots j_{\ell - 1}\alpha},
+    \end{equation}
+    known as a \textbf{contraction} of $A$.
+\end{definition}
+\begin{remark}
+    Note that if $A$ is of type $\binom{1}{1}$, there is only one contraction of $A$, defined as the \textit{trace} of $A$, $\text{tr}A=\sum\limits_{i=1}^nA_i^i$
+\end{remark}
  
 \end{multicols*}
 \end{document}
